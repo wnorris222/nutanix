@@ -1,0 +1,39 @@
+# teewatch configuration
+site:
+  # The booking page you would normally open in a browser. teewatch swaps the
+  # date for each day it checks, so leave the date in - any value works.
+  url: "https://the-walker-course-at-clemson-university.book.teeitup.com/?course=12802&date=2026-09-11&holes=18&max=9999"
+  timezone: "America/New_York"
+
+poll:
+  interval_seconds: 300   # how often to re-check (minimum 60)
+  horizon_days: 30        # how far ahead to look
+  renotify_after_hours: 12  # re-alert if a slot disappears and comes back
+
+# Each watch is one "tell me about..." rule. A tee time matching any watch alerts.
+watches:
+  - name: "Friday mornings"
+    days: [friday]
+    before: "10:00"
+    players: 2            # need room for at least this many
+    holes: 18
+
+  # - name: "Weekend twilight"
+  #   days: [saturday, sunday]
+  #   after: "16:00"
+  #   players: 4
+
+notify:
+  console: true
+  # desktop: true         # macOS/Linux notification banner
+  # ntfy:                 # free push to your phone: install ntfy, subscribe to the topic
+  #   topic: "walker-course-<something-random-and-private>"
+  # email:
+  #   host: "smtp.gmail.com"
+  #   port: 587
+  #   from: "you@example.com"
+  #   to: ["you@example.com"]
+  #   password_env: "TEEWATCH_SMTP_PASSWORD"   # app password, read from the environment
+  # webhook:
+  #   url: "https://hooks.slack.com/services/..."
+  #   template: slack

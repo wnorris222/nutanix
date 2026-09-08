@@ -1,0 +1,21 @@
+{
+  "data": {
+    "courses": [
+      {
+        "id": 12802,
+        "name": "The Walker Course at Clemson University",
+        "teetimes": [
+          {"teetime": "2026-09-11T07:30:00", "players": [1, 2, 3, 4], "holes": 18,
+           "rates": [{"name": "Public", "greenFeeWalking": 4500, "price": 52.0}],
+           "bookingUrl": "https://the-walker-course-at-clemson-university.book.teeitup.com/?course=12802"},
+          {"teetime": "2026-09-11T09:10:00", "players": [1, 2], "holes": 18,
+           "rates": [{"name": "Public", "price": 52.0}]},
+          {"teetime": "2026-09-11T13:40:00", "players": [1, 2, 3, 4], "holes": 18,
+           "rates": [{"name": "Twilight", "price": 38.0}]},
+          {"teetime": "2026-09-11T15:00:00", "players": [3, 4], "holes": 9,
+           "rates": [{"name": "Nine", "price": 25.0}]}
+        ]
+      }
+    ]
+  }
+}

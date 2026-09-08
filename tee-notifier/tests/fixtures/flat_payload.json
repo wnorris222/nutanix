@@ -1,0 +1,8 @@
+{
+  "results": [
+    {"startDateTime": "09/11/2026 07:45 AM", "availableParticipantNo": 4,
+     "holeCount": 18, "displayPrice": "$49.00", "facilityName": "Walker Course"},
+    {"startDateTime": "09/11/2026 10:15 AM", "availableParticipantNo": 2,
+     "holeCount": 18, "displayPrice": "$49.00", "facilityName": "Walker Course"}
+  ]
+}
