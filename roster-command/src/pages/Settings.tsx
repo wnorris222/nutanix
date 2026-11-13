@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useStore } from '../store';
 import type { AppState, Settings } from '../types';
 import { Card, Field, Gate, PageHead } from '../ui';
@@ -6,17 +6,20 @@ import { Card, Field, Gate, PageHead } from '../ui';
 export default function SettingsPage() {
   const { state, update, replace, reset } = useStore();
   const file = useRef<HTMLInputElement>(null);
+  const [msg, setMsg] = useState('');
+  const [confirmReset, setConfirmReset] = useState(false);
   const s = state.settings;
   const set = <K extends keyof Settings>(k: K, v: Settings[K]) => update((d) => { d.settings[k] = v; });
   const wsum = s.weights.onField + s.weights.development + s.weights.depth + s.weights.execution;
 
-  const exportJson = () => {
-    const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `roster-command-${s.season}.json`;
-    a.click();
-    URL.revokeObjectURL(a.href);
+  const exportJson = async () => {
+    const text = JSON.stringify(state, null, 2);
+    try {
+      await navigator.clipboard.writeText(text);
+      setMsg('Copied all data to the clipboard. Paste it into a .json file to save it.');
+    } catch {
+      setMsg('Your browser blocked clipboard access. Use a browser tab instead of the app view.');
+    }
   };
 
   return (
@@ -49,7 +52,7 @@ export default function SettingsPage() {
         </Card>
         <Card title="Data" sub="Data is stored in this browser only">
           <div className="row gap-s wrap">
-            <button className="btn secondary" onClick={exportJson}>Export JSON</button>
+            <button className="btn secondary" onClick={exportJson}>Copy data as JSON</button>
             <button className="btn secondary" onClick={() => file.current?.click()}>Import JSON</button>
             <input ref={file} type="file" accept="application/json" hidden onChange={async (e) => {
               const f = e.target.files?.[0];
@@ -59,14 +62,22 @@ export default function SettingsPage() {
                 if (parsed.version !== 1 || !Array.isArray(parsed.players)) throw new Error('bad');
                 replace(parsed);
               } catch {
-                alert('That file is not a valid Roster Command export.');
+                setMsg('That file is not a valid Roster Command export.');
               }
               e.target.value = '';
             }} />
             <Gate roles={['AD', 'GM']} what="Reset">
-              <button className="btn danger" onClick={() => { if (confirm('Reset all data to the sample dataset?')) reset(); }}>Reset to sample data</button>
+              {confirmReset ? (
+                <span className="row gap-s">
+                  <button className="btn danger" onClick={() => { reset(); setConfirmReset(false); setMsg('Data reset to the sample dataset.'); }}>Yes, reset everything</button>
+                  <button className="btn ghost" onClick={() => setConfirmReset(false)}>Cancel</button>
+                </span>
+              ) : (
+                <button className="btn danger" onClick={() => setConfirmReset(true)}>Reset to sample data</button>
+              )}
             </Gate>
           </div>
+          {msg && <p className="small">{msg}</p>}
           <p className="muted small">All players, prospects, and dollar figures in the sample dataset are fictional and illustrative.</p>
         </Card>
       </div>

@@ -60,7 +60,7 @@ export default function ReviewsPage() {
                 <ul className="checklist small">
                   <li>Development plan with measurable grade targets for each returning player</li>
                   <li>High school recruiting adjustments for the next class</li>
-                  <li><strong>Mandatory:</strong> Build vs. Buy analysis and portal target list (<a href="#/buildbuy">open</a>)</li>
+                  <li><strong>Mandatory:</strong> Build vs. Buy analysis and portal target list (<a href="#buildbuy">open</a>)</li>
                   <li>Re-review at next quarter by the GM and head coach</li>
                 </ul>
                 <div className="row gap-s">

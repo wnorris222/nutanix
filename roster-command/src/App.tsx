@@ -28,7 +28,7 @@ export const NAV = [
   { id: 'reviews', label: 'Quarterly Reviews', icon: '▦', group: 'Evaluate' },
   { id: 'coaches', label: 'Coach KPIs', icon: '★', group: 'Evaluate' },
   { id: 'committee', label: 'Roster Committee', icon: '◈', group: 'Govern' },
-  { id: 'settings', label: 'Settings', icon: '⚙', group: 'Govern' },
+  { id: 'admin', label: 'Settings', icon: '⚙', group: 'Govern' },
 ] as const;
 
 export type PageId = (typeof NAV)[number]['id'];
@@ -45,16 +45,16 @@ const PAGES: Record<PageId, () => JSX.Element> = {
   reviews: ReviewsPage,
   coaches: CoachesPage,
   committee: CommitteePage,
-  settings: SettingsPage,
+  admin: SettingsPage,
 };
 
 function currentPage(): PageId {
-  const h = window.location.hash.replace('#/', '').replace('#', '');
+  const h = window.location.hash.replace('#', '');
   return (NAV.find((n) => n.id === h)?.id ?? 'dashboard') as PageId;
 }
 
 export function go(id: string) {
-  window.location.hash = `#/${id}`;
+  window.location.hash = `#${id}`;
 }
 
 export default function App() {
@@ -92,7 +92,7 @@ export default function App() {
             <div key={g} className="nav-g">
               <div className="nav-gl">{g}</div>
               {NAV.filter((n) => n.group === g).map((n) => (
-                <a key={n.id} href={`#/${n.id}`} className={`nav-i ${page === n.id ? 'active' : ''}`}>
+                <a key={n.id} href={`#${n.id}`} className={`nav-i ${page === n.id ? 'active' : ''}`}>
                   <span className="nav-ic" aria-hidden>{n.icon}</span>
                   {n.label}
                   {n.id === 'triggers' && open > 0 && <span className="nav-count">{open}</span>}

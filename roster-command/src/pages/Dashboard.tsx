@@ -38,7 +38,7 @@ export default function Dashboard() {
               <li key={s.name} className={s.done ? 'done' : ''}>
                 <span className="cycle-n">{s.done ? '✓' : i + 1}</span>
                 <div>
-                  <a href={`#/${s.link}`}>{s.name}</a>
+                  <a href={`#${s.link}`}>{s.name}</a>
                   <div className="muted small">{s.owner}</div>
                 </div>
                 <Badge tone={s.done ? 'good' : 'warn'}>{s.done ? 'Complete' : 'Open'}</Badge>
@@ -47,13 +47,13 @@ export default function Dashboard() {
           </ol>
         </Card>
 
-        <Card title="Top escalations" sub="Mandatory evaluations — not mandates to sign" actions={<a className="btn ghost" href="#/triggers">All →</a>}>
+        <Card title="Top escalations" sub="Mandatory evaluations — not mandates to sign" actions={<a className="btn ghost" href="#triggers">All →</a>}>
           {openTriggers.length === 0 && <p className="muted">No open escalations.</p>}
           <ul className="list esc-list">
             {openTriggers.slice(0, 6).map((t) => (
               <li key={t.id}>
                 <Badge tone={t.severity === 'high' ? 'bad' : 'warn'}>{t.action}</Badge>
-                <a href={`#/${t.link}`}>{t.title}</a>
+                <a href={`#${t.link}`}>{t.title}</a>
               </li>
             ))}
           </ul>
@@ -61,7 +61,7 @@ export default function Dashboard() {
       </div>
 
       <div className="grid-3">
-        <Card title="Budget allocation" sub={`${money(state.budget.total)} player-compensation budget`} actions={<a className="btn ghost" href="#/budget">Open →</a>}>
+        <Card title="Budget allocation" sub={`${money(state.budget.total)} player-compensation budget`} actions={<a className="btn ghost" href="#budget">Open →</a>}>
           {budget.map((b) => (
             <div key={b.bucket} className="bud-row">
               <div className="row between">
@@ -73,7 +73,7 @@ export default function Dashboard() {
           ))}
         </Card>
 
-        <Card title="Weakest position groups" sub="Independent audit grade (starters)" actions={<a className="btn ghost" href="#/audit">Audit →</a>}>
+        <Card title="Weakest position groups" sub="Independent audit grade (starters)" actions={<a className="btn ghost" href="#audit">Audit →</a>}>
           <ul className="list">
             {weakest.map((a) => (
               <li key={a.pos} className="row between">
@@ -84,7 +84,7 @@ export default function Dashboard() {
           </ul>
         </Card>
 
-        <Card title="Portal pipeline" sub="Identified → evaluated → contacted → acquired" actions={<a className="btn ghost" href="#/pipeline">Pipeline →</a>}>
+        <Card title="Portal pipeline" sub="Identified → evaluated → contacted → acquired" actions={<a className="btn ghost" href="#pipeline">Pipeline →</a>}>
           <div className="funnel">
             {(['identified', 'evaluated', 'contacted', 'acquired'] as const).map((k) => (
               <div key={k} className="funnel-row">
@@ -98,7 +98,7 @@ export default function Dashboard() {
         </Card>
       </div>
 
-      <Card title="Coach evaluations (MBO)" sub="Lowest composite first — on-field 40%, development 25%, roster quality 20%, acquisition & retention 15%" actions={<a className="btn ghost" href="#/coaches">Scorecards →</a>}>
+      <Card title="Coach evaluations (MBO)" sub="Lowest composite first — on-field 40%, development 25%, roster quality 20%, acquisition & retention 15%" actions={<a className="btn ghost" href="#coaches">Scorecards →</a>}>
         <div className="coach-strip">
           {coaches.slice(0, 6).map(({ c, m }) => (
             <div key={c.id} className="coach-chip">

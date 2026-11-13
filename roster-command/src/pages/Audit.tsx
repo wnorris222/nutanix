@@ -84,8 +84,8 @@ export default function AuditPage() {
           <li>Individual player performance against ACC and playoff-contender benchmarks</li>
           <li>Positions lacking championship-caliber starters or depth — <strong>{audits.filter((a) => a.auditGrade < 80).map((a) => a.pos).join(', ') || 'none'}</strong></li>
           <li>Whether existing players are developing at the expected rate — <strong>{audits.filter((a) => a.devRate < a.devTarget).map((a) => a.pos).join(', ') || 'all on pace'}</strong> behind target</li>
-          <li>Positions where transfers could provide immediate upgrades — see <a href="#/pipeline">Portal Pipeline</a></li>
-          <li>Whether previous decisions not to pursue transfers were justified — see <a href="#/buildbuy">Build vs. Buy</a></li>
+          <li>Positions where transfers could provide immediate upgrades — see <a href="#pipeline">Portal Pipeline</a></li>
+          <li>Whether previous decisions not to pursue transfers were justified — see <a href="#buildbuy">Build vs. Buy</a></li>
         </ul>
       </Card>
 

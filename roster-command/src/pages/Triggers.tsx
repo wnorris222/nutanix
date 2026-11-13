@@ -49,7 +49,7 @@ export default function TriggersPage() {
                     <Badge tone="purple">{t.action}</Badge>
                     <span className="muted small">Owner: {t.owner}</span>
                   </div>
-                  <a href={`#/${t.link}`} className="trig-t">{t.title}</a>
+                  <a href={`#${t.link}`} className="trig-t">{t.title}</a>
                   <div className="muted small">{t.detail}</div>
                   {a?.note && <div className="small quote">“{a.note}” — {a.updated}</div>}
                 </div>
